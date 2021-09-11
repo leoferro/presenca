@@ -23,7 +23,7 @@ const SnackBarApp = ({ mensagemSnackBarApp, setMensagemSnackBarApp }) => {
             <Snackbar
                 visible={visible}
                 onDismiss={onDismissSnackBar}
-                style={{ position: 'absolute', bottom: '3em', marginLeft:'auto', marginRight:'auto', right:10, left:10 }}
+                style={{ position: 'absolute', bottom: 50, marginLeft:'auto', marginRight:'auto', right:10, left:10 }}
                 action={{
                     label: 'Ok'
                 }}>

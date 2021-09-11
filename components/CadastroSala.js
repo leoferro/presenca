@@ -103,7 +103,7 @@ const CadastroSala = ({ modalVisivel, setModalVisivel, setSala, sala, setDadosSa
                     onChangeText={text => setSiglaTurma(text)}
                     mode='outlined'
                 />
-                <View style={{ flexDirection: 'row', alignItems:'center', marginTop:'2em'}}>
+                <View style={{ flexDirection: 'row', alignItems:'center', marginTop:10}}>
                     <Button style={{flexGrow:1}} onPress={acaoCondicionalBotao}>{textoBotaoModalEnviar}</Button>
                     <Button style={{flexGrow:1}} onPress={descartar}>Descartar</Button>
                     {iconeCondicional()}
