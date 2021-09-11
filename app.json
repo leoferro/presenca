@@ -1,11 +1,17 @@
 {
   "expo": {
-    "name": "presenca",
-    "slug": "presenca",
+    "name": "Presenca",
+    "icon":"./p.png",
+    "slug": "presenca-leo9266",
     "version": "1.0.0",
-    "assetBundlePatterns": [
-      "**/*"
-    ]
+    "ios": {
+      "bundleIdentifier": "com.leo9266.presenca",
+      "buildNumber": "1.0.0"
+    },
+    "android": {
+      "package": "com.leo9266.presenca",
+      "versionCode": 1
+    }
   },
-  "name": "presenca"
+  "name": "Presenca"
 }
