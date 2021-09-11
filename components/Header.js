@@ -83,7 +83,7 @@ function Header({ sala, setSala, setModalVisivel, dadosSalas, carregarDados, set
                 anchor={<Appbar.Action icon="dots-vertical" onPress={abrirMenu} />}
             >
                 <Button
-                    onPress={abrirModalCadastroEscola}
+                    onPress={()=>{abrirModalCadastroEscola()}}
                 >Nova Escola</Button>
                 {condicionalDados()}
             </Menu>
