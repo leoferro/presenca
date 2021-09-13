@@ -1,5 +1,5 @@
 import { Turma } from '../models/Turma.js';
-import { storeData, getData, pegarChaves, removeItem } from '../sotorage/storage.js';
+import { storeData, getData, pegarChaves, removeItem } from '../storage/storage.js';
 
 // Usar a string da sigla da turma para pegar os dados
 export const pegarTurma = async (siglaTurma) => {
@@ -41,7 +41,7 @@ export const listaTurmas = async () => {
     })
 }
 
-//TODO: criar o deletar turma
+
 export const mudarNomeSiglaTurmaData = async (nomeNovo, siglaNova, sala) => {
     const siglaAntiga = sala.getSigla()
     const mudouSigla = siglaAntiga !== siglaNova
@@ -64,13 +64,8 @@ export const mudarNomeSiglaTurmaData = async (nomeNovo, siglaNova, sala) => {
 }
 export const deletarDataSala = async (sala) => {
     const delet = await removeItem('sala-' + sala.getSigla())
-    console.log(delet)
 }
 
-export const testeControler = () => {
-    const turmaTeste = new Turma('1afp', '1ºA Fu Paulo')
-    console.log(turmaTeste)
-}
 
 export const salvarAluno = async (numero, aluno, sala) => {
     const adicionarClasse = sala.adicionarAluno(numero, aluno)
@@ -79,7 +74,6 @@ export const salvarAluno = async (numero, aluno, sala) => {
     } else {
         const salvar = await gravarTurma(sala)
         return { sala }
-        //TODO: retornar sempre em objeto para conferir se existe erro
     }
 }
 
@@ -99,7 +93,6 @@ export const deletarDataChamada = async (data, sala) => {
     if ('erro' in tempDelCham) {
         return tempDelCham
     } else {
-        console.log(sala)
         await gravarTurma(sala)
         return sala
     }
@@ -107,7 +100,6 @@ export const deletarDataChamada = async (data, sala) => {
 
 export const deleteDataAluno = async (numero, sala) => {
     const remAlunTemp = sala.removerAluno(numero)
-    console.log(remAlunTemp)
     if ('erro' in remAlunTemp) {
         return remAlunTemp
     } else {

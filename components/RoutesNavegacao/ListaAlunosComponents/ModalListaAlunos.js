@@ -23,13 +23,23 @@ const ModalListaAlunos = ({ fecharModal , funcaoModal, alunoAtual, setAlunoAtual
         setNumeroAluno('')
     }
 
-    const botaoFuncaoModal = () => {
-        if (funcaoModal === 'add') {
-            enviarAdicionarAluno(numeroAluno, nomeAlunoNovo)
-        } else if (funcaoModal === 'edit') {
-            editarAluno(numeroAluno, nomeAlunoNovo)
+    const validarInputs = ()=>{
+        if (isNaN(parseInt(numeroAluno)) || nomeAlunoNovo == '') {
+            setErroNumero(isNaN(parseInt(numeroAluno)))
+            setErroNome(nomeAlunoNovo == '')
+            return false
         }
+        return true
+    }
 
+    const botaoFuncaoModal = () => {
+        if (validarInputs()){
+            if (funcaoModal === 'add') {
+                enviarAdicionarAluno(numeroAluno, nomeAlunoNovo)
+            } else if (funcaoModal === 'edit') {
+                editarAluno(numeroAluno, nomeAlunoNovo)
+            }
+        }
     }
 
 
@@ -60,6 +70,9 @@ const ModalListaAlunos = ({ fecharModal , funcaoModal, alunoAtual, setAlunoAtual
         if (alunoAtual && nomeAlunoNovo==''){
             setNomeAlunoNovo(alunoAtual.nome)
             setNumeroAluno(alunoAtual.numero)
+        }else{
+            setNomeAlunoNovo('')
+            setNumeroAluno('')
         }
     },[alunoAtual])
 

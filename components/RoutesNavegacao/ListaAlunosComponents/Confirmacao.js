@@ -2,28 +2,33 @@ import * as React from 'react';
 import { View } from 'react-native';
 import { Button, Paragraph, Dialog, Portal, Provider } from 'react-native-paper';
 
-const Confirmacao = ({setVisivelConfirmacao, visivelConfirmacao, mensagemTelaConfirmacao, deletarAluno, setNumeroAluno, numeroAluno}) => {
+const Confirmacao = ({ mensagemTelaConfirmacao, deletarAluno, setMensagemTelaConfirmacao, setAlunoAtual }) => {
 
-  const esconderConfirmacao = () => {
-      setNumeroAluno('')
+  const [visivelConfirmacao, setVisivelConfirmacao] = React.useState(false)
+
+  React.useEffect(() => {
+    if (mensagemTelaConfirmacao == '') {
+      setAlunoAtual(null)
       setVisivelConfirmacao(false)
-    };
+    } else {
+      setVisivelConfirmacao(true)
+    }
+  }, [mensagemTelaConfirmacao])
 
   return (
     <Provider>
       <View>
         <Portal>
-          <Dialog visible={visivelConfirmacao} onDismiss={esconderConfirmacao}>
+          <Dialog visible={visivelConfirmacao} onDismiss={() => { setMensagemTelaConfirmacao('') }}>
             <Dialog.Title>Atenção</Dialog.Title>
             <Dialog.Content>
               <Paragraph>{mensagemTelaConfirmacao}</Paragraph>
             </Dialog.Content>
             <Dialog.Actions>
-              <Button onPress={esconderConfirmacao}>Cancelar</Button>
-              <Button onPress={async ()=>{
-                  console.log(deletarAluno)
-                  await deletarAluno(numeroAluno)
-                  esconderConfirmacao()
+              <Button onPress={() => { setMensagemTelaConfirmacao('') }}>Cancelar</Button>
+              <Button onPress={async () => {
+                setMensagemTelaConfirmacao('')
+                await deletarAluno()
               }}>Deletar</Button>
             </Dialog.Actions>
           </Dialog>

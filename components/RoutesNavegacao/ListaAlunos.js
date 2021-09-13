@@ -11,14 +11,11 @@ import {Turma} from '../../models/Turma'
 const ListaAlunos = ({ sala, setSala }) => {
 
     const [visivelSnackBar, setVisivelSnackBar] = useState(false)
-    const [visivelModal, setVisivelModal] = useState(false)
 
-    const [numeroAluno, setNumeroAluno] = useState('')
     const [mensagemModal, setMensagemModal] = useState('')
     const [listaAlunos, setListaAlunos] = useState([])
 
     const [mensagemTelaConfirmacao, setMensagemTelaConfirmacao] = useState('')
-    const [visivelConfirmacao, setVisivelConfirmacao] = useState(false)
 
     const [funcaoModal, setFuncaoModal] = useState(null)
 
@@ -34,14 +31,9 @@ const ListaAlunos = ({ sala, setSala }) => {
         setFuncaoModal('edit')
     }
 
-
-
     const fecharModal = () => {
         setFuncaoModal(null)
     };
-
-
-
 
 
     //--Funções que interagem com o controlador--
@@ -59,13 +51,6 @@ const ListaAlunos = ({ sala, setSala }) => {
         }
         setVisivelSnackBar(true)
         fecharModal()
-
-        //limparErrosModal()
-        //if (isNaN(parseInt(numeroAluno)) || nomeAlunoNovo == '') {
-        //    setErroNumero(isNaN(parseInt(numeroAluno)))
-        //    setErroNome(nomeAlunoNovo == '')
-        //} else {
-        //}
     }
 
 
@@ -83,7 +68,6 @@ const ListaAlunos = ({ sala, setSala }) => {
     const entrarTelaConfirmacao = (alunoNumero) => {
         setAlunoAtual({nome:sala.nomes[alunoNumero], numero:alunoNumero})
         setMensagemTelaConfirmacao('Você tem certeza que quer deletar ' + sala.nomes[alunoNumero])
-        setVisivelConfirmacao(true)
     }
 
     const deletarAluno = async () => {
@@ -92,6 +76,7 @@ const ListaAlunos = ({ sala, setSala }) => {
         setSala(novaSala)
         setMensagemModal('Aluno deletado com sucesso')
         setAlunoAtual(null)
+        setMensagemTelaConfirmacao('')
     }
 
 
@@ -129,9 +114,7 @@ const ListaAlunos = ({ sala, setSala }) => {
 
     return (
         <>
-
             <ScrollView>
-
                 <Portal>
                     <ModalListaAlunos
                         fecharModal={fecharModal}
@@ -154,12 +137,10 @@ const ListaAlunos = ({ sala, setSala }) => {
             </ScrollView>
 
             <Confirmacao
-                setVisivelConfirmacao={setVisivelConfirmacao}
-                visivelConfirmacao={visivelConfirmacao}
                 mensagemTelaConfirmacao={mensagemTelaConfirmacao}
+                setMensagemTelaConfirmacao={setMensagemTelaConfirmacao}
                 deletarAluno={deletarAluno}
-                numeroAluno={numeroAluno}
-                setNumeroAluno={setNumeroAluno}
+                setAlunoAtual={setAlunoAtual}
             />
 
             <View style={styles.container}>
