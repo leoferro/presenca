@@ -4,7 +4,7 @@ import { Appbar, Menu, Divider, Button, IconButton } from 'react-native-paper';
 import { listaTurmas, pegarTurma } from '../controler/controlerTurmaStorage';
 
 
-function Header({ sala, setSala, setModalVisivel, dadosSalas, carregarDados, setNomeTurma, setSiglaTurma , setSobrescreverTurma}) {
+function Header({ sala, setSala, setModalVisivel, dadosSalas, carregarDados , setSobrescreverTurma}) {
 
     const [subHeader, setSubHeader] = useState('Escolha a sala')
 
@@ -49,8 +49,6 @@ function Header({ sala, setSala, setModalVisivel, dadosSalas, carregarDados, set
                 <IconButton
                     icon='briefcase-edit-outline'
                     onPress={()=>{
-                        setNomeTurma(sala.getNome())
-                        setSiglaTurma(sala.getSigla())
                         setSobrescreverTurma(true)
                         abrirModalCadastroEscola()
                     }}

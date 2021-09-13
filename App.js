@@ -23,18 +23,12 @@ export default function App() {
 
   //states do Modal
   const [modalVisivel, setModalVisivel] = useState(false)
-  const [nomeTurma, setNomeTurma] = useState('')
-  const [siglaTurma, setSiglaTurma] = useState('')
   const [sobrescreverTurma, setSobrescreverTurma] = useState(false)
   
 
   const carregarDados = async () => {
     const dados = await listaTurmas()
     setDadosSalas(dados)
-  }
-
-  const mudarMensagem = ()=>{
-    setMensagemSnackBarApp('teste')
   }
 
   useEffect(() => {
@@ -48,10 +42,6 @@ export default function App() {
       <CadastroSala
         sobrescreverTurma={sobrescreverTurma}
         setSobrescreverTurma={setSobrescreverTurma}
-        nomeTurma={nomeTurma}
-        siglaTurma={siglaTurma}
-        setNomeTurma={setNomeTurma}
-        setSiglaTurma={setSiglaTurma}
         modalVisivel={modalVisivel}
         setModalVisivel={setModalVisivel}
         setSala={setSala} sala={sala}
@@ -69,8 +59,6 @@ export default function App() {
         dadosSalas={dadosSalas}
         setDadosSalas={setDadosSalas}
         carregarDados={carregarDados}
-        setNomeTurma={setNomeTurma}
-        setSiglaTurma={setSiglaTurma}
       />
 
       <BotoesNavegacao

@@ -1,14 +1,17 @@
 import * as React from 'react';
-import { Modal, Portal, Text, Button, Provider, TextInput, IconButton } from 'react-native-paper';
-import { criarTurma, pegarTurma, mudarNomeSiglaTurmaData, deletarDataSala } from '../controler/controlerTurmaStorage';
+import { Modal, Portal, Button, Provider, TextInput, IconButton } from 'react-native-paper';
+import { criarTurma, mudarNomeSiglaTurmaData, deletarDataSala } from '../controler/controlerTurmaStorage';
 import { Turma } from '../models/Turma';
 import ConfirmacaoCadastroSalas from './CadastroSalaComponents/ConfirmacaoCadastroSala'
 import { View } from 'react-native';
 
-const CadastroSala = ({ modalVisivel, setModalVisivel, setSala, sala, setDadosSalas, dadosSalas, carregarDados, setNomeTurma, setSiglaTurma, nomeTurma, siglaTurma, sobrescreverTurma, setSobrescreverTurma, setMensagemSnackBarApp }) => {
+const CadastroSala = ({ modalVisivel, setModalVisivel, setSala, sala, carregarDados,  sobrescreverTurma, setSobrescreverTurma, setMensagemSnackBarApp }) => {
+
+    const [nomeTurma, setNomeTurma] = React.useState('')
+    const [siglaTurma, setSiglaTurma] = React.useState('')
 
 
-    const [textoBotaoModalEnviar, setTextoBotaoModalEnviar] = React.useState('Teste')
+    const [textoBotaoModalEnviar, setTextoBotaoModalEnviar] = React.useState('')
 
     const [mensagemConfirmacao, setMensagemConfirmacao] = React.useState('')
 
@@ -26,11 +29,16 @@ const CadastroSala = ({ modalVisivel, setModalVisivel, setSala, sala, setDadosSa
 
     React.useEffect(() => {
         if (sobrescreverTurma) {
+            setNomeTurma(sala.nomeTurma)
+            setSiglaTurma(sala.siglaTurma)
             setTextoBotaoModalEnviar('Alterar')
         } else {
+            setNomeTurma('')
+            setSiglaTurma('')
             setTextoBotaoModalEnviar('Cadastrar')
         }
     }, [sobrescreverTurma])
+
 
     const mudarNomeSiglaTurma = async () => {
         const res = await mudarNomeSiglaTurmaData(nomeTurma, siglaTurma, sala)
@@ -93,14 +101,14 @@ const CadastroSala = ({ modalVisivel, setModalVisivel, setSala, sala, setDadosSa
                 <TextInput
                     label="Nome da escola"
                     value={nomeTurma}
-                    onChangeText={text => setNomeTurma(text)}
+                    onChangeText={setNomeTurma}
                     mode='outlined'
                 />
 
                 <TextInput
                     label="Sigla da escola"
                     value={siglaTurma}
-                    onChangeText={text => setSiglaTurma(text)}
+                    onChangeText={setSiglaTurma}
                     mode='outlined'
                 />
                 <View style={{ flexDirection: 'row', alignItems:'center', marginTop:10}}>
